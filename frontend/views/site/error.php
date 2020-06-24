@@ -9,19 +9,25 @@ use yii\helpers\Html;
 
 $this->title = $name;
 ?>
-<div class="site-error">
 
-    <h1><?= Html::encode($this->title) ?></h1>
+<div id="error-page" class="col-md-8 mx-auto text-center">
+    <div class="box">
+        <p class="text-center">
+            <a href="<?= Yii::$app->homeUrl ?>">
+                <img src="/img/logo.png" alt="<?= Yii::$app->name ?>">
+            </a>
+        </p>
+        <h3>
+            <?= nl2br(Html::encode($message)) ?>
+        </h3>
 
-    <div class="alert alert-danger">
-        <?= nl2br(Html::encode($message)) ?>
+        <h4 class="text-muted">
+            <?= Html::encode($this->title) ?>
+        </h4>
+
+        <p class="buttons"><a href="<?= Yii::$app->homeUrl ?>" class="btn btn-template-outlined">
+                <i class="fa fa-home"></i> Go to Homepage
+            </a>
+        </p>
     </div>
-
-    <p>
-        The above error occurred while the Web server was processing your request.
-    </p>
-    <p>
-        Please contact us if you think this is a server error. Thank you.
-    </p>
-
 </div>
