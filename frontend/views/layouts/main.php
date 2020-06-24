@@ -347,27 +347,25 @@ AppAsset::register($this);
     </div>
 </header>
 
-<?php if(isset($this->params['breadcrumbs'])): ?>
+<?php if (isset($this->params['breadcrumbs'])): ?>
 
-<div id="heading-breadcrumbs">
-    <div class="container">
-        <div class="row d-flex align-items-center flex-wrap">
-            <div class="col-md-7">
-                <h1 class="h2">Category Full</h1>
-            </div>
-            <div class="col-md-5">
-                <ul class="breadcrumb d-flex justify-content-end">
-                    <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-                    <li class="breadcrumb-item active">Category Full</li>
-                </ul>
-
-                <?= Breadcrumbs::widget([
-                    'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
-                ]) ?>
+    <div id="heading-breadcrumbs">
+        <div class="container">
+            <div class="row d-flex align-items-center flex-wrap">
+                <div class="col-md-7">
+                    <h1 class="h2">Category Full</h1>
+                </div>
+                <div class="col-md-5">
+                    <?= Breadcrumbs::widget([
+                        'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
+                        'options' => [
+                                'class' => 'breadcrumb d-flex justify-content-end'
+                        ],
+                    ]) ?>
+                </div>
             </div>
         </div>
     </div>
-</div>
 
 <?php endif; ?>
 
@@ -402,19 +400,19 @@ AppAsset::register($this);
                     <li class="d-flex align-items-center">
                         <div class="image"><img src="img/detailsquare.jpg" alt="..." class="img-fluid"></div>
                         <div class="text">
-                            <h5 class="mb-0"> <a href="post.html">Blog post name</a></h5>
+                            <h5 class="mb-0"><a href="post.html">Blog post name</a></h5>
                         </div>
                     </li>
                     <li class="d-flex align-items-center">
                         <div class="image"><img src="img/detailsquare.jpg" alt="..." class="img-fluid"></div>
                         <div class="text">
-                            <h5 class="mb-0"> <a href="post.html">Blog post name</a></h5>
+                            <h5 class="mb-0"><a href="post.html">Blog post name</a></h5>
                         </div>
                     </li>
                     <li class="d-flex align-items-center">
                         <div class="image"><img src="img/detailsquare.jpg" alt="..." class="img-fluid"></div>
                         <div class="text">
-                            <h5 class="mb-0"> <a href="post.html">Very very long blog post name</a></h5>
+                            <h5 class="mb-0"><a href="post.html">Very very long blog post name</a></h5>
                         </div>
                     </li>
                 </ul>
@@ -422,17 +420,26 @@ AppAsset::register($this);
             </div>
             <div class="col-lg-3">
                 <h4 class="h6">Contact</h4>
-                <p class="text-uppercase"><strong>Universal Ltd.</strong><br>13/25 New Avenue <br>Newtown upon River <br>45Y 73J <br>England <br><strong>Great Britain</strong></p><a href="contact.html" class="btn btn-template-main">Go to contact page</a>
+                <p class="text-uppercase"><strong>Universal Ltd.</strong><br>13/25 New Avenue <br>Newtown upon River
+                    <br>45Y 73J <br>England <br><strong>Great Britain</strong></p><a href="contact.html"
+                                                                                     class="btn btn-template-main">Go to
+                    contact page</a>
                 <hr class="d-block d-lg-none">
             </div>
             <div class="col-lg-3">
                 <ul class="list-inline photo-stream">
-                    <li class="list-inline-item"><a href="#"><img src="img/detailsquare.jpg" alt="..." class="img-fluid"></a></li>
-                    <li class="list-inline-item"><a href="#"><img src="img/detailsquare2.jpg" alt="..." class="img-fluid"></a></li>
-                    <li class="list-inline-item"><a href="#"><img src="img/detailsquare3.jpg" alt="..." class="img-fluid"></a></li>
-                    <li class="list-inline-item"><a href="#"><img src="img/detailsquare3.jpg" alt="..." class="img-fluid"></a></li>
-                    <li class="list-inline-item"><a href="#"><img src="img/detailsquare2.jpg" alt="..." class="img-fluid"></a></li>
-                    <li class="list-inline-item"><a href="#"><img src="img/detailsquare.jpg" alt="..." class="img-fluid"></a></li>
+                    <li class="list-inline-item"><a href="#"><img src="img/detailsquare.jpg" alt="..."
+                                                                  class="img-fluid"></a></li>
+                    <li class="list-inline-item"><a href="#"><img src="img/detailsquare2.jpg" alt="..."
+                                                                  class="img-fluid"></a></li>
+                    <li class="list-inline-item"><a href="#"><img src="img/detailsquare3.jpg" alt="..."
+                                                                  class="img-fluid"></a></li>
+                    <li class="list-inline-item"><a href="#"><img src="img/detailsquare3.jpg" alt="..."
+                                                                  class="img-fluid"></a></li>
+                    <li class="list-inline-item"><a href="#"><img src="img/detailsquare2.jpg" alt="..."
+                                                                  class="img-fluid"></a></li>
+                    <li class="list-inline-item"><a href="#"><img src="img/detailsquare.jpg" alt="..."
+                                                                  class="img-fluid"></a></li>
                 </ul>
             </div>
         </div>
