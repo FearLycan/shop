@@ -10,9 +10,22 @@ return [
     'id' => 'app-backend',
     'basePath' => dirname(__DIR__),
     'controllerNamespace' => 'backend\controllers',
+    'timeZone' => 'Europe/Warsaw',
+    'defaultRoute' => 'admin/dashboard/index',
     'bootstrap' => ['log'],
-    'modules' => [],
+    'modules' => [
+        'admin' => [
+            'class' => 'backend\modules\admin\Module',
+        ],
+    ],
     'components' => [
+        'view' => [
+            'theme' => [
+                'pathMap' => [
+                    '@app/views' => '@vendor/dmstr/yii2-adminlte-asset/example-views/yiisoft/yii2-advanced-app'
+                ],
+            ],
+        ],
         'request' => [
             'csrfParam' => '_csrf-backend',
         ],
@@ -37,14 +50,12 @@ return [
         'errorHandler' => [
             'errorAction' => 'site/error',
         ],
-        /*
         'urlManager' => [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' => [
             ],
         ],
-        */
     ],
     'params' => $params,
 ];
