@@ -19,7 +19,7 @@ class m200724_204904_create_product_specification_table extends Migration
             'product_id' => $this->integer(),
             'status' => $this->smallInteger()->defaultValue(1),
             'created_at' => $this->timestamp()->notNull()->defaultExpression('CURRENT_TIMESTAMP'),
-            'updated_at' => $this->timestamp()->null()
+            'updated_at' => $this->timestamp()->null(),
         ]);
 
         $this->createIndex('{{%product_specification_name_index}}', '{{%product_specification}}', 'name');

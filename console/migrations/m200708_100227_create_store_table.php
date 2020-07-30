@@ -30,6 +30,7 @@ class m200708_100227_create_store_table extends Migration
         ]);
 
         $this->createIndex('{{%store_name_index}}', '{{%store}}', 'name');
+        $this->createIndex('{{%store_slug_index}}', '{{%store}}', 'slug');
 
         $this->createIndex('{{%store_created_at_index}}', '{{%store}}', 'created_at');
         $this->createIndex('{{%store_updated_at_index}}', '{{%store}}', 'updated_at');

@@ -22,7 +22,7 @@ class m200723_133809_create_feedback_table extends Migration
             'color' => $this->string()->null(),
             'ships_from' => $this->string()->null(),
             'logistics' => $this->string()->null(),
-            'date' => $this->string()->null(),
+            'date' => $this->timestamp()->null(),
             'content' => $this->text()->null(),
             'product_id' => $this->integer(),
             'status' => $this->smallInteger()->defaultValue(1),
@@ -32,6 +32,7 @@ class m200723_133809_create_feedback_table extends Migration
 
         $this->createIndex('{{%product_feedback_created_at_index}}', '{{%product_feedback}}', 'created_at');
         $this->createIndex('{{%product_feedback_updated_at_index}}', '{{%product_feedback}}', 'updated_at');
+        $this->createIndex('{{%product_feedback_date_index}}', '{{%product_feedback}}', 'date');
 
         $this->addForeignKey('{{%product_feedback_product_id_fk}}', '{{%product_feedback}}', 'product_id', '{{%product}}', 'id', 'CASCADE', 'CASCADE');
     }

@@ -2,32 +2,34 @@
 
 namespace common\models;
 
+use Yii;
 use yii\behaviors\SluggableBehavior;
 use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveRecord;
 
 /**
- * This is the model class for table "{{%store}}".
+ * This is the model class for table "{{%product_feedback}}".
  *
  * @property int $id
  * @property string $name
+ * @property string|null $display_name
  * @property string|null $slug
- * @property int|null $company_id
- * @property int|null $store_number
- * @property int|null $followers
- * @property int|null $rating_count
+ * @property string|null $country
  * @property int|null $rating
- * @property string|null $image
- * @property string|null $description
- * @property string|null $link
+ * @property string|null $color
+ * @property string|null $ships_from
+ * @property string|null $logistics
+ * @property string|null $date
+ * @property string|null $content
+ * @property int|null $product_id
  * @property int|null $status
  * @property string $created_at
  * @property string|null $updated_at
  *
- * @property Product[] $products
- * @property Product[] $products0
+ * @property Product $product
+ * @property ProductFeedbackImage[] $productFeedbackImages
  */
-class Store extends \yii\db\ActiveRecord
+class ProductFeedback extends \yii\db\ActiveRecord
 {
     //statuses
     const STATUS_ACTIVE = 1;
@@ -49,7 +51,7 @@ class Store extends \yii\db\ActiveRecord
             ],
             'slug' => [
                 'class' => SluggableBehavior::className(),
-                'attribute' => 'name',
+                'attribute' => 'display_name',
                 'slugAttribute' => 'slug',
                 'ensureUnique' => true,
                 'immutable' => true,
@@ -62,7 +64,7 @@ class Store extends \yii\db\ActiveRecord
      */
     public static function tableName()
     {
-        return '{{%store}}';
+        return '{{%product_feedback}}';
     }
 
     /**
@@ -72,10 +74,11 @@ class Store extends \yii\db\ActiveRecord
     {
         return [
             [['name'], 'required'],
-            [['company_id', 'store_number', 'followers', 'rating_count', 'rating', 'status'], 'integer'],
-            [['description'], 'string'],
+            [['rating', 'product_id', 'status'], 'integer'],
+            [['content'], 'string'],
             [['created_at', 'updated_at'], 'safe'],
-            [['name', 'slug', 'image', 'link'], 'string', 'max' => 255],
+            [['name', 'display_name', 'slug', 'country', 'color', 'ships_from', 'logistics', 'date'], 'string', 'max' => 255],
+            [['product_id'], 'exist', 'skipOnError' => true, 'targetClass' => Product::className(), 'targetAttribute' => ['product_id' => 'id']],
         ];
     }
 
@@ -87,15 +90,16 @@ class Store extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'name' => 'Name',
+            'display_name' => 'Display Name',
             'slug' => 'Slug',
-            'company_id' => 'Company ID',
-            'store_number' => 'Store Number',
-            'followers' => 'Followers',
-            'rating_count' => 'Rating Count',
+            'country' => 'Country',
             'rating' => 'Rating',
-            'image' => 'Image',
-            'description' => 'Description',
-            'link' => 'Link',
+            'color' => 'Color',
+            'ships_from' => 'Ships From',
+            'logistics' => 'Logistics',
+            'date' => 'Date',
+            'content' => 'Content',
+            'product_id' => 'Product ID',
             'status' => 'Status',
             'created_at' => 'Created At',
             'updated_at' => 'Updated At',
@@ -103,23 +107,23 @@ class Store extends \yii\db\ActiveRecord
     }
 
     /**
-     * Gets query for [[Products]].
+     * Gets query for [[Product]].
      *
      * @return \yii\db\ActiveQuery
      */
-    public function getProducts()
+    public function getProduct()
     {
-        return $this->hasMany(Product::className(), ['category_id' => 'id']);
+        return $this->hasOne(Product::className(), ['id' => 'product_id']);
     }
 
     /**
-     * Gets query for [[Products0]].
+     * Gets query for [[ProductFeedbackImages]].
      *
      * @return \yii\db\ActiveQuery
      */
-    public function getProducts0()
+    public function getProductFeedbackImages()
     {
-        return $this->hasMany(Product::className(), ['store_id' => 'id']);
+        return $this->hasMany(ProductFeedbackImage::className(), ['product_feedback_id' => 'id']);
     }
 
     /**
