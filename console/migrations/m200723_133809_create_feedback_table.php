@@ -16,6 +16,7 @@ class m200723_133809_create_feedback_table extends Migration
             'id' => $this->primaryKey(),
             'name' => $this->string()->notNull(),
             'display_name' => $this->string()->null(),
+            'ali_user_id' => $this->string()->null(),
             'slug' => $this->string()->null(),
             'country' => $this->string()->null(),
             'rating' => $this->integer()->defaultValue(0),

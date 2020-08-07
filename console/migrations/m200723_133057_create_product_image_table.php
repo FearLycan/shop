@@ -17,8 +17,6 @@ class m200723_133057_create_product_image_table extends Migration
             'image' => $this->string()->notNull(),
             'product_id' => $this->integer(),
             'status' => $this->smallInteger()->defaultValue(1),
-            'original_price' => $this->decimal(4, 2)->null()->defaultValue(0),
-            'sale_price' => $this->decimal(4, 2)->null()->defaultValue(0),
             'created_at' => $this->timestamp()->notNull()->defaultExpression('CURRENT_TIMESTAMP'),
             'updated_at' => $this->timestamp()->null()
         ]);

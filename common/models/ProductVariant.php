@@ -2,8 +2,6 @@
 
 namespace common\models;
 
-use Yii;
-
 /**
  * This is the model class for table "{{%product_variant}}".
  *
@@ -12,6 +10,8 @@ use Yii;
  * @property string $display_name
  * @property string|null $image
  * @property int|null $product_id
+ * @property float|null $original_price
+ * @property float|null $sale_price
  * @property int|null $status
  * @property string $created_at
  * @property string|null $updated_at
@@ -20,6 +20,11 @@ use Yii;
  */
 class ProductVariant extends \yii\db\ActiveRecord
 {
+    //statuses
+    const STATUS_ACTIVE = 1;
+    const STATUS_INACTIVE = 0;
+
+
     /**
      * {@inheritdoc}
      */
@@ -36,6 +41,7 @@ class ProductVariant extends \yii\db\ActiveRecord
         return [
             [['name', 'display_name'], 'required'],
             [['product_id', 'status'], 'integer'],
+            [['original_price', 'sale_price'], 'number'],
             [['created_at', 'updated_at'], 'safe'],
             [['name', 'display_name', 'image'], 'string', 'max' => 255],
             [['product_id'], 'exist', 'skipOnError' => true, 'targetClass' => Product::className(), 'targetAttribute' => ['product_id' => 'id']],
@@ -53,6 +59,8 @@ class ProductVariant extends \yii\db\ActiveRecord
             'display_name' => 'Display Name',
             'image' => 'Image',
             'product_id' => 'Product ID',
+            'original_price' => 'Original Price',
+            'sale_price' => 'Sale Price',
             'status' => 'Status',
             'created_at' => 'Created At',
             'updated_at' => 'Updated At',
@@ -67,5 +75,24 @@ class ProductVariant extends \yii\db\ActiveRecord
     public function getProduct()
     {
         return $this->hasOne(Product::className(), ['id' => 'product_id']);
+    }
+
+    /**
+     * @return string[]
+     */
+    public static function getStatusNames()
+    {
+        return [
+            self::STATUS_ACTIVE => 'Active',
+            self::STATUS_INACTIVE => 'Inactive',
+        ];
+    }
+
+    /**
+     * @return string
+     */
+    public function getStatusName()
+    {
+        return self::getStatusNames()[$this->status];
     }
 }

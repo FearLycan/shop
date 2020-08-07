@@ -2,7 +2,6 @@
 
 namespace common\models;
 
-use Yii;
 use yii\behaviors\SluggableBehavior;
 use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveRecord;
@@ -15,6 +14,7 @@ use yii\db\ActiveRecord;
  * @property string|null $display_name
  * @property string|null $slug
  * @property string|null $country
+ * @property string|null $ali_user_id
  * @property int|null $rating
  * @property string|null $color
  * @property string|null $ships_from
@@ -75,7 +75,7 @@ class ProductFeedback extends \yii\db\ActiveRecord
         return [
             [['name'], 'required'],
             [['rating', 'product_id', 'status'], 'integer'],
-            [['content'], 'string'],
+            [['content', 'ali_user_id'], 'string'],
             [['created_at', 'updated_at'], 'safe'],
             [['name', 'display_name', 'slug', 'country', 'color', 'ships_from', 'logistics', 'date'], 'string', 'max' => 255],
             [['product_id'], 'exist', 'skipOnError' => true, 'targetClass' => Product::className(), 'targetAttribute' => ['product_id' => 'id']],

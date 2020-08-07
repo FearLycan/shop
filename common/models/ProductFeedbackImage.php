@@ -2,20 +2,21 @@
 
 namespace common\models;
 
+use Yii;
+
 /**
- * This is the model class for table "{{%product_specification}}".
+ * This is the model class for table "{{%product_feedback_image}}".
  *
  * @property int $id
- * @property string $name
- * @property string $value
- * @property int|null $product_id
+ * @property string $image
+ * @property int|null $product_feedback_id
  * @property int|null $status
  * @property string $created_at
  * @property string|null $updated_at
  *
- * @property Product $product
+ * @property ProductFeedback $productFeedback
  */
-class ProductSpecification extends \yii\db\ActiveRecord
+class ProductFeedbackImage extends \yii\db\ActiveRecord
 {
     //statuses
     const STATUS_ACTIVE = 1;
@@ -26,7 +27,7 @@ class ProductSpecification extends \yii\db\ActiveRecord
      */
     public static function tableName()
     {
-        return '{{%product_specification}}';
+        return '{{%product_feedback_image}}';
     }
 
     /**
@@ -35,11 +36,11 @@ class ProductSpecification extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['name', 'value'], 'required'],
-            [['product_id', 'status'], 'integer'],
+            [['image'], 'required'],
+            [['product_feedback_id', 'status'], 'integer'],
             [['created_at', 'updated_at'], 'safe'],
-            [['name', 'value'], 'string', 'max' => 255],
-            [['product_id'], 'exist', 'skipOnError' => true, 'targetClass' => Product::className(), 'targetAttribute' => ['product_id' => 'id']],
+            [['image'], 'string', 'max' => 255],
+            [['product_feedback_id'], 'exist', 'skipOnError' => true, 'targetClass' => ProductFeedback::className(), 'targetAttribute' => ['product_feedback_id' => 'id']],
         ];
     }
 
@@ -50,9 +51,8 @@ class ProductSpecification extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'name' => 'Name',
-            'value' => 'Value',
-            'product_id' => 'Product ID',
+            'image' => 'Image',
+            'product_feedback_id' => 'Product Feedback ID',
             'status' => 'Status',
             'created_at' => 'Created At',
             'updated_at' => 'Updated At',
@@ -60,13 +60,13 @@ class ProductSpecification extends \yii\db\ActiveRecord
     }
 
     /**
-     * Gets query for [[Product]].
+     * Gets query for [[ProductFeedback]].
      *
      * @return \yii\db\ActiveQuery
      */
-    public function getProduct()
+    public function getProductFeedback()
     {
-        return $this->hasOne(Product::className(), ['id' => 'product_id']);
+        return $this->hasOne(ProductFeedback::className(), ['id' => 'product_feedback_id']);
     }
 
     /**
