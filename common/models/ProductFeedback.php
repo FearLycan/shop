@@ -27,7 +27,7 @@ use yii\db\ActiveRecord;
  * @property string|null $updated_at
  *
  * @property Product $product
- * @property ProductFeedbackImage[] $productFeedbackImages
+ * @property ProductFeedbackImage[] $images
  */
 class ProductFeedback extends \yii\db\ActiveRecord
 {
@@ -121,7 +121,7 @@ class ProductFeedback extends \yii\db\ActiveRecord
      *
      * @return \yii\db\ActiveQuery
      */
-    public function getProductFeedbackImages()
+    public function getImages()
     {
         return $this->hasMany(ProductFeedbackImage::className(), ['product_feedback_id' => 'id']);
     }

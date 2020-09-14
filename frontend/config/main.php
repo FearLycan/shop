@@ -11,6 +11,12 @@ return [
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
     'controllerNamespace' => 'frontend\controllers',
+    'defaultRoute' => 'product/default/index',
+    'modules' => [
+        'product' => [
+            'class' => 'frontend\modules\product\Module',
+        ],
+    ],
     'components' => [
         'request' => [
             'csrfParam' => '_csrf-frontend',
@@ -40,6 +46,8 @@ return [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' => [
+                '/products' => '/product/default/index',
+                '/product/<slug>' => '/product/default/view',
             ],
         ],
     ],

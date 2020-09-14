@@ -26,10 +26,10 @@ use yii\db\ActiveRecord;
  *
  * @property Store $category
  * @property Store $store
- * @property ProductFeedback[] $productFeedbacks
- * @property ProductImage[] $productImages
- * @property ProductSpecification[] $productSpecifications
- * @property ProductVariant[] $productVariants
+ * @property ProductFeedback[] $feedbacks
+ * @property ProductImage[] $images
+ * @property ProductSpecification[] $specifications
+ * @property ProductVariant[] $variants
  */
 class Product extends \yii\db\ActiveRecord
 {
@@ -134,7 +134,7 @@ class Product extends \yii\db\ActiveRecord
      *
      * @return \yii\db\ActiveQuery
      */
-    public function getProductFeedbacks()
+    public function getFeedbacks()
     {
         return $this->hasMany(ProductFeedback::className(), ['product_id' => 'id']);
     }
@@ -144,7 +144,7 @@ class Product extends \yii\db\ActiveRecord
      *
      * @return \yii\db\ActiveQuery
      */
-    public function getProductImages()
+    public function getImages()
     {
         return $this->hasMany(ProductImage::className(), ['product_id' => 'id']);
     }
@@ -154,9 +154,24 @@ class Product extends \yii\db\ActiveRecord
      *
      * @return \yii\db\ActiveQuery
      */
-    public function getProductSpecifications()
+    public function getSpecifications()
     {
         return $this->hasMany(ProductSpecification::className(), ['product_id' => 'id']);
+    }
+
+    public function getSpecificationsHalf($halt = 1)
+    {
+        $len = count($this->specifications);
+
+        if ($halt == 1) {
+            return array_slice($this->specifications, 0, $len / 2);
+        } else {
+            return array_slice($this->specifications, $len / 2);
+        }
+
+
+        //$firsthalf = array_slice($input, 0, $len / 2);
+        //$secondhalf = array_slice($input, $len / 2);
     }
 
     /**
@@ -164,7 +179,7 @@ class Product extends \yii\db\ActiveRecord
      *
      * @return \yii\db\ActiveQuery
      */
-    public function getProductVariants()
+    public function getVariants()
     {
         return $this->hasMany(ProductVariant::className(), ['product_id' => 'id']);
     }

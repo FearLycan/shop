@@ -24,6 +24,7 @@ class AppAsset extends AssetBundle
         'vendor/popper.js/umd/popper.min.js',
         'vendor/bootstrap/js/bootstrap.min.js',
         'vendor/jquery.cookie/jquery.cookie.js',
+        'js/jquery.pjax.js',
         'vendor/waypoints/lib/jquery.waypoints.min.js',
         'vendor/jquery.counterup/jquery.counterup.min.js',
         'vendor/owl.carousel/owl.carousel.min.js',
