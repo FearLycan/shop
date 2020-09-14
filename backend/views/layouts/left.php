@@ -27,6 +27,8 @@ use yii\helpers\Url;
                     ['label' => 'MAIN NAVIGATION', 'options' => ['class' => 'header']],
                     ['label' => 'Dashboard', 'icon' => 'dashboard', 'url' => ['/admin/dashboard/index'], 'visible' => true],
                     ['label' => 'Stores', 'icon' => 'shopping-bag', 'url' => ['/admin/store/index'], 'visible' => true],
+                    ['label' => 'PRODUCTS', 'options' => ['class' => 'header']],
+                    ['label' => 'Products', 'icon' => 'list-alt', 'url' => ['/admin/product/index'], 'visible' => true],
                 ],
             ]
         ) ?>

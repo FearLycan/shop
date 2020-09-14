@@ -2,6 +2,8 @@
 
 namespace common\models;
 
+use phpDocumentor\Reflection\Types\Boolean;
+
 /**
  * This is the model class for table "{{%product_variant}}".
  *
@@ -94,5 +96,10 @@ class ProductVariant extends \yii\db\ActiveRecord
     public function getStatusName()
     {
         return self::getStatusNames()[$this->status];
+    }
+
+    public function isActive()
+    {
+        return $this->status === self::STATUS_ACTIVE;
     }
 }
