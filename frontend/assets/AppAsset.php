@@ -16,6 +16,8 @@ class AppAsset extends AssetBundle
         'vendor/bootstrap-select/css/bootstrap-select.min.css',
         'vendor/owl.carousel/assets/owl.carousel.css',
         'vendor/owl.carousel/assets/owl.theme.default.css',
+        'vendor/photo-swipe/photoswipe.css',
+        'vendor/photo-swipe/default-skin/default-skin.css',
         'css/style.default.css',
         'css/site.css',
     ];
@@ -32,6 +34,8 @@ class AppAsset extends AssetBundle
         'js/jquery.parallax-1.1.3.js',
         'vendor/bootstrap-select/js/bootstrap-select.min.js',
         'vendor/jquery.scrollto/jquery.scrollTo.min.js',
+        'vendor/photo-swipe/photoswipe.js',
+        'vendor/photo-swipe/photoswipe-ui-default.js',
         'js/front.js',
     ];
 

@@ -11,7 +11,7 @@ use yii\helpers\Url;
 <div class="product">
     <div class="image">
         <a href="<?= Url::to(['view', 'slug' => $model->slug]) ?>">
-            <img src="<?= $model->productImages[0]->image ?>" alt="<?= $model->title ?>" class="img-fluid image1">
+            <img src="<?= $model->images[0]->image ?>" alt="<?= $model->title ?>" class="img-fluid image1">
         </a>
     </div>
     <div class="text">
@@ -21,9 +21,9 @@ use yii\helpers\Url;
             </a>
         </h3>
         <p class="price">
-            <del>$<?= $model->productVariants[0]->original_price ?></del>
+            <del>$<?= $model->variants[0]->original_price ?></del>
 
-            $<?= $model->productVariants[0]->sale_price ?>
+            $<?= $model->variants[0]->sale_price ?>
         </p>
     </div>
 </div>
