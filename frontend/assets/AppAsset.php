@@ -30,12 +30,14 @@ class AppAsset extends AssetBundle
         'vendor/waypoints/lib/jquery.waypoints.min.js',
         'vendor/jquery.counterup/jquery.counterup.min.js',
         'vendor/owl.carousel/owl.carousel.min.js',
+        'vendor/owl.carousel/jquery.mousewheel.min.js',
         'vendor/owl.carousel2.thumbs/owl.carousel2.thumbs.min.js',
         'js/jquery.parallax-1.1.3.js',
         'vendor/bootstrap-select/js/bootstrap-select.min.js',
         'vendor/jquery.scrollto/jquery.scrollTo.min.js',
         'vendor/photo-swipe/photoswipe.js',
         'vendor/photo-swipe/photoswipe-ui-default.js',
+        'vendor/jquery.lazy/jquery.lazy.min.js',
         'js/front.js',
     ];
 

@@ -7,7 +7,8 @@ $this->title = $model->title;
 $this->params['breadcrumbs'][] = ['label' => 'Products', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
-?>
+
+use yii\helpers\Url; ?>
 
 
 <div class="row bar">
@@ -31,9 +32,17 @@ $this->params['breadcrumbs'][] = $this->title;
                     <div class="owl-stage-outer">
                         <div class="owl-stage">
                             <?php foreach ($model->images as $key => $image): ?>
-                                <div class="owl-item">
+                                <div class="owl-item slide">
                                     <div>
                                         <img src="<?= $image->image ?>" alt="" class="img-fluid">
+                                    </div>
+                                </div>
+                            <?php endforeach; ?>
+
+                            <?php foreach ($model->variants as $key => $variant): ?>
+                                <div class="owl-item variant" id="variant<?= $key ?>">
+                                    <div>
+                                        <img src="<?= $variant->image ?>" alt="" class="img-fluid">
                                     </div>
                                 </div>
                             <?php endforeach; ?>
@@ -52,44 +61,35 @@ $this->params['breadcrumbs'][] = $this->title;
                 <div class="box">
                     <form>
                         <div class="sizes">
-                            <h3>Available sizes</h3>
-                            <div class="dropdown bootstrap-select bs-select"><select class="bs-select" tabindex="-98">
-                                    <option value="small">Small</option>
-                                    <option value="medium">Medium</option>
-                                    <option value="large">Large</option>
-                                    <option value="x-large">X Large</option>
-                                </select>
-                                <button type="button" class="btn dropdown-toggle btn-light" data-toggle="dropdown"
-                                        role="combobox" aria-owns="bs-select-1" aria-haspopup="listbox"
-                                        aria-expanded="false" title="Small">
-                                    <div class="filter-option">
-                                        <div class="filter-option-inner">
-                                            <div class="filter-option-inner-inner">Small</div>
-                                        </div>
+                            <h3>Variants</h3>
+                            <div class="row variants">
+                                <?php foreach ($model->variants as $key => $variant): ?>
+                                    <div class="col-md-3">
+                                        <img src="<?= $variant->image ?>" data-id="variant<?= $key ?>"
+                                             class="img-fluid variant">
                                     </div>
-                                </button>
-                                <div class="dropdown-menu ">
-                                    <div class="inner show" role="listbox" id="bs-select-1" tabindex="-1">
-                                        <ul class="dropdown-menu inner show" role="presentation"></ul>
-                                    </div>
-                                </div>
+                                <?php endforeach; ?>
                             </div>
                         </div>
-                        <p class="price">$124.00</p>
+                        <p class="price">
+                            $<?= $model->variants[0]->sale_price ?>
+                        </p>
                         <p class="text-center">
-                            <button type="submit" class="btn btn-template-outlined"><i class="fa fa-shopping-cart"></i>
-                                Add to cart
-                            </button>
-                            <button type="submit" data-toggle="tooltip" data-placement="top" title=""
-                                    class="btn btn-default" data-original-title="Add to wishlist"><i
-                                        class="fa fa-heart-o"></i></button>
+                            <a href="#" type="submit" class="btn btn-template-outlined">
+                                <i class="fa fa-shopping-cart"></i>
+                                Buy it Now
+                            </a>
+                            <a href="#" type="submit" data-toggle="tooltip" data-placement="top" title="Add to wishlist"
+                               class="btn btn-default" data-original-title="Add to wishlist">
+                                <i class="fa fa-heart-o"></i></a>
                         </p>
                     </form>
                 </div>
                 <div data-slider-id="1" class="owl-thumbs">
                     <?php foreach ($model->images as $key => $image): ?>
-                        <button data-key="<?= $key ?>" class="owl-thumb-item <?= $key == 0 ? 'active' : '' ?>">
-                            <img src="<?= $image->image ?>" alt="" class="img-fluid">
+                        <button class="owl-thumb-item">
+                            <img src="<?= Url::to('@web/images/animated_spinner.webp') ?>"
+                                 data-src="<?= $image->image ?>" alt="" class="img-fluid lazy">
                         </button>
                     <?php endforeach; ?>
                 </div>
@@ -169,10 +169,11 @@ $this->params['breadcrumbs'][] = $this->title;
                                     <div class="media mt-3 gallery">
                                         <?php foreach ($feedback->images as $key => $image): ?>
                                             <a class="mr-3" href="<?= $image->image ?>"
-                                               data-med="https://farm6.staticflickr.com/5584/14985868676_4b802b932a_b.jpg"
+                                               data-med="<?= $image->image ?>"
                                                data-author="<?= $feedback->name ?>">
-                                                <img src="<?= $image->image ?>"
-                                                     class="img-fluid img-thumbnail mr-3" style="max-height: 80px;"
+                                                <img data-src="<?= $image->image ?>"
+                                                     src="<?= Url::to('@web/images/animated_spinner.webp') ?>"
+                                                     class="img-fluid img-thumbnail mr-3 lazy" style="max-height: 80px;"
                                                      alt="Feedback #<?= $feedback->id ?> image #<?= $key ?>">
                                                 <figure><?= $feedback->content ?></figure>
                                             </a>
@@ -213,6 +214,18 @@ $this->params['breadcrumbs'][] = $this->title;
 <?php
 $js = <<<JS
 
+$( ".variants" ).on( "click", "img", function() {
+  $('img.variant.active').removeClass('active');
+  $('.owl-item.active').removeClass('active');
+  $('.owl-thumb-item.active').removeClass('active');
+  
+  $(this).addClass('active');
+  
+  let id = $(this).data('id');
+  
+  let target = $('#'+id);
+  $('.owl-carousel').trigger("to.owl.carousel", [$(target).index(), 250]);
+});
 
 function getSize(url) {
   const img = new Image();

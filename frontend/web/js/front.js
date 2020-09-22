@@ -1,6 +1,6 @@
 $(function () {
 
-
+    initLazy();
 
     // ------------------------------------------------------- //
     // Navbar Sticky
@@ -14,7 +14,7 @@ $(function () {
             $('header.nav-holder.make-sticky').removeClass('sticky');
             $('body').css('padding-top', '0');
         }
-    }); 
+    });
 
     // ------------------------------------------------------- //
     // Multi-level dropdown
@@ -230,66 +230,44 @@ $(function () {
     // ------------------------------------------------------- //
     //  Shop Detail Carousel
     // ------------------------------------------------------ //
-    $('.shop-detail-carousel').owlCarousel({
+    let owl = $('.owl-carousel');
+    owl.owlCarousel({
         items: 1,
         thumbs: true,
         nav: false,
         dots: false,
-        autoplay: true,
-        thumbsPrerendered: true
+        autoplay: false,
+        thumbsPrerendered: true,
+        nestedItemSelector: 'slide'
     });
-
-
-    // ------------------------------------------------------ //
-    // For demo purposes, can be deleted
-    // ------------------------------------------------------ //
-
-    var stylesheet = $('link#theme-stylesheet');
-    $("<link id='new-stylesheet' rel='stylesheet'>").insertAfter(stylesheet);
-    var alternateColour = $('link#new-stylesheet');
-
-    if ($.cookie("theme_csspath")) {
-        alternateColour.attr("href", $.cookie("theme_csspath"));
-    }
-
-    $("#colour").change(function () {
-
-        if ($(this).val() !== '') {
-
-            var theme_csspath = 'css/style.' + $(this).val() + '.css';
-
-            alternateColour.attr("href", theme_csspath);
-
-            $.cookie("theme_csspath", theme_csspath, {
-                expires: 365,
-                path: document.URL.substr(0, document.URL.lastIndexOf('/'))
-            });
-
+    owl.on('mousewheel', '.owl-stage', function (e) {
+        if (e.deltaY > 0) {
+            owl.trigger('next.owl');
+        } else {
+            owl.trigger('prev.owl');
         }
 
-        return false;
+        $('img.variant.active').removeClass('active');
+
+        e.preventDefault();
     });
 
-    if ($.cookie("theme_layout")) {
-        $('body').addClass($.cookie("theme_layout"));
-    }
-
-    $("#layout").change(function () {
-
-        if ($(this).val() !== '') {
-
-            var theme_layout = $(this).val();
-
-            $('body').removeClass('wide');
-            $('body').removeClass('boxed');
-
-            $('body').addClass(theme_layout);
-
-            $.cookie("theme_layout", theme_layout, {
-                expires: 365,
-                path: document.URL.substr(0, document.URL.lastIndexOf('/'))
-            });
-        }
-    });
+    // owl.on('changed.owl.carousel', function (event) {
+    //     if ($(".owl-item:eq(" + event.item.index + ")").hasClass('variant')) {
+    //         owl.trigger('prev.owl.carousel', [1]);
+    //     }
+    // });
 
 });
+
+function initLazy() {
+    $(function () {
+        $('.lazy').Lazy({
+            scrollDirection: 'vertical',
+            effect: 'fadeIn',
+            effectTime: 100,
+            enableThrottle: true,
+            throttle: 250
+        });
+    });
+}

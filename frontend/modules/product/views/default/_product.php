@@ -11,7 +11,7 @@ use yii\helpers\Url;
 <div class="product">
     <div class="image">
         <a href="<?= Url::to(['view', 'slug' => $model->slug]) ?>">
-            <img src="<?= $model->images[0]->image ?>" alt="<?= $model->title ?>" class="img-fluid image1">
+            <img src="<?= Url::to('@web/images/animated_spinner.webp') ?>" data-src="<?= $model->images[0]->image ?>" alt="<?= $model->title ?>" class="img-fluid image lazy">
         </a>
     </div>
     <div class="text">
